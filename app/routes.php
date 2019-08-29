@@ -1,6 +1,6 @@
 <?php
 
-//use App\Database\DB;
+use App\Database\DB;
 
 /* CORS
     $app->options('/{routes:.+}', function ($request, $response, $args) {
@@ -58,7 +58,7 @@ $app->get('/a', function ($request, $response) {
 
 $app->get('/b', function ($request, $response) {
     $sql = "INSERT INTO redes.parametros (parametros) VALUES (?) RETURNING id";
-    $this->db->query($sql, ["P4"], false);
+    DB::query($sql, ["P4"], false);
 
     $a = $this->db->query("SELECT * FROM redes.parametros WHERE id>=?", 56);
 
