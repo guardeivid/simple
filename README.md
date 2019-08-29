@@ -9,9 +9,9 @@
 ### Instalacion
 
 #### 1 Manual Install
-You can manually install SlimApp by cloning this repo or download the zip file from this repo, and run ```composer install```.
+You can manually install Simple by cloning this repo or download the zip file from this repo, and run ```composer install```.
 ```
-$git clone https://github.com/guardeivid/SlimApp.git .
+$git clone https://github.com/guardeivid/simple.git .
 $composer install
 ```
 
@@ -21,16 +21,12 @@ $composer install
 - The `app` Directory
 - The `bootstrap` Directory
 - The `public` Directory
-- The `storage` Directory
+- The `storage` Directory (no created)
 - The `vendor` Directory
 
 ### The App Directory
 - The `Controllers` Directory
-- The `Middelware` Directory
-- The `Models` Directory
-- The `Validation` Directory
-    - The `Exceptions` Directory
-    - The `Rules` Directory    
+- The `Middelware` Directory   
 - The `Views` Directory
 
 - The `routes.php` File
@@ -123,7 +119,7 @@ Controller class have access to differents properties:
 
 ## View
 Views file are located in ```app/Views``` directory in twig format, there is home.twig with 'body' block as default master template
-shipped with SlimApp that will provide default access to published js variable.
+shipped with Simple that will provide default access to published js variable.
 
 For detailed Twig documentation, please refer to http://twig.sensiolabs.org/documentation
 
@@ -132,7 +128,7 @@ file : app/Views/welcome.twig
 ```html
 {% extends 'home.twig' %}
 {% block body %}
-    Welcome to SlimApp
+    Welcome to Simple
 {% endblock %}
 
 ```
@@ -147,20 +143,7 @@ $this->view->fetch('welcome.twig', $this->data);
 $this->view->render($this->response, 'home.twig', $this->data);
 ```
 
-## Validation
-If your controller extends the Controller class, you will have access to $validator property which will be the placeholder for all
-validations from request. 
-[https://respect-validation.readthedocs.io/](https://respect-validation.readthedocs.io/)
-
-```php
-$validation = $this->validator->validate($this->request, [
-    'name' => v::noWhitespace()->notEmpty()
-]);
-
-if ($validation->failed()){
-    return $this->response->withRedirect($this->router->pathFor('home'));
-}
-```
+## Template values
 
 And from the view you can access to `{{ error.property }}`
 ```html
@@ -300,6 +283,10 @@ use \Slim\Views\Twig;
 $view->fetch($template, $data = []);
 $view->render(ResponseInterface $response, $template, $data = []);
 
+
+use \App\Database\DB;
+DB::query($sql, [ $params= [] ], [ $all = true ]);
+$db->query($sql, $params, $all);
 ```
 
 Run 

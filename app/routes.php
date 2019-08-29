@@ -58,10 +58,10 @@ $app->get('/a', function ($request, $response) {
 
 $app->get('/b', function ($request, $response) {
     $sql = "INSERT INTO redes.parametros (parametros) VALUES (?) RETURNING id";
-    //$a = DB::query($sql, ["PARAMETRO INDEFINIDO"], false);
+    $this->db->query($sql, ["P4"], false);
 
-    $a = DB::query("SELECT * FROM redes.parametros WHERE id>=?", 56);
+    $a = $this->db->query("SELECT * FROM redes.parametros WHERE id>=?", 56);
 
-    $a = $this->db->query('SELECT * FROM redes.parametros');
+    //$a = $this->db->query('SELECT * FROM redes.parametros');
     return $response->withJson($a);
 });

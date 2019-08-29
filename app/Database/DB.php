@@ -39,10 +39,9 @@ class DB
     {
         $stmt = self::connect()->prepare($query);
         $params = is_array($params) ? $params : [$params];
-        $stmt->execute($params);
 
         try {
-            $stmt->execute();
+            $stmt->execute($params);
         } catch (PDOException $e) {
             $error = $e->getMessage();
         }
